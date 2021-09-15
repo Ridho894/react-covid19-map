@@ -30,7 +30,8 @@ const App = () => {
             name: country.country,
             value: country.countryInfo.iso2,
           }));
-          let sortedData = sortData(data);
+          // let sortedData = sortData(data);
+          let sortedData = (data);
           setCountries(countries);
           setMapCountries(data);
           setTableData(sortedData);
