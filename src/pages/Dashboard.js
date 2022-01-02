@@ -14,6 +14,7 @@ import { sortData, prettyPrintStat } from "../utils/util";
 import numeral from "numeral";
 import Map from "../Map";
 import "leaflet/dist/leaflet.css";
+import Navbar from "../components/Navbar";
 
 const Dashboard = () => {
   const [country, setInputCountry] = useState("worldwide");
@@ -72,56 +73,58 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="app">
-      <div className="app__left">
-        <div className="app__header">
-          <h1>COVID-19 Tracker</h1>
-          <FormControl className="app__dropdown">
-            <Select
-              variant="outlined"
-              value={country}
-              onChange={onCountryChange}
-            >
-              <MenuItem value="worldwide">Worldwide</MenuItem>
-              {countries.map((country) => (
-                <MenuItem value={country.value}>{country.name}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+    <div>
+      <Navbar />
+      <div className="app">
+        <div className="app__left">
+          <div className="app__header">
+            <FormControl className="app__dropdown">
+              <Select
+                variant="outlined"
+                value={country}
+                onChange={onCountryChange}
+              >
+                <MenuItem value="worldwide">Worldwide</MenuItem>
+                {countries.map((country) => (
+                  <MenuItem value={country.value}>{country.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+          <div className="app__stats">
+            <InfoBox
+              onClick={(e) => setCasesType("cases")}
+              title="Coronavirus Cases"
+              isRed
+              active={casesType === "cases"}
+              cases={prettyPrintStat(countryInfo.todayCases)}
+              total={numeral(countryInfo.cases).format("0.0a")}
+            />
+            <InfoBox
+              onClick={(e) => setCasesType("recovered")}
+              title="Recovered"
+              active={casesType === "recovered"}
+              cases={prettyPrintStat(countryInfo.todayRecovered)}
+              total={numeral(countryInfo.recovered).format("0.0a")}
+            />
+            <InfoBox
+              onClick={(e) => setCasesType("deaths")}
+              title="Deaths"
+              isRed
+              active={casesType === "deaths"}
+              cases={prettyPrintStat(countryInfo.todayDeaths)}
+              total={numeral(countryInfo.deaths).format("0.0a")}
+            />
+          </div>
+          <Map
+            countries={mapCountries}
+            casesType={casesType}
+            center={mapCenter}
+            zoom={mapZoom}
+          />
         </div>
-        <div className="app__stats">
-          <InfoBox
-            onClick={(e) => setCasesType("cases")}
-            title="Coronavirus Cases"
-            isRed
-            active={casesType === "cases"}
-            cases={prettyPrintStat(countryInfo.todayCases)}
-            total={numeral(countryInfo.cases).format("0.0a")}
-          />
-          <InfoBox
-            onClick={(e) => setCasesType("recovered")}
-            title="Recovered"
-            active={casesType === "recovered"}
-            cases={prettyPrintStat(countryInfo.todayRecovered)}
-            total={numeral(countryInfo.recovered).format("0.0a")}
-          />
-          <InfoBox
-            onClick={(e) => setCasesType("deaths")}
-            title="Deaths"
-            isRed
-            active={casesType === "deaths"}
-            cases={prettyPrintStat(countryInfo.todayDeaths)}
-            total={numeral(countryInfo.deaths).format("0.0a")}
-          />
-        </div>
-        <Map
-          countries={mapCountries}
-          casesType={casesType}
-          center={mapCenter}
-          zoom={mapZoom}
-        />
       </div>
-      <Card className="app__right">
+      <Card className="app__table">
         <CardContent>
           <div className="app__information">
             <h3>Live Cases by Country</h3>
