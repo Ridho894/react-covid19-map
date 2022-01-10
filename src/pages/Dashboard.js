@@ -15,6 +15,7 @@ import numeral from "numeral";
 import Map from "../Map";
 import "leaflet/dist/leaflet.css";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Dashboard = () => {
   const [country, setInputCountry] = useState("worldwide");
@@ -134,6 +135,7 @@ const Dashboard = () => {
           </div>
         </CardContent>
       </Card>
+      <Footer />
     </div>
   );
 };
