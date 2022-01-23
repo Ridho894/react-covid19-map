@@ -1,16 +1,10 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Dashboard from './pages/Dashboard';
-import NotFound from './pages/NotFound';
+import './App.css';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Dashboard} />
-        <Route path='*' component={NotFound} />
-      </Switch>
-    </Router>
+    <div className="bg-red-500">
+      <h1>HELLO WORLD</h1>
+    </div>
   );
 }
 
