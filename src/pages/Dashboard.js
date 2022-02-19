@@ -3,6 +3,7 @@ import Map from "../components/Map";
 import Navbar from "../components/Navbar";
 import { sortData } from "../utils/util";
 import "leaflet/dist/leaflet.css";
+import StickyHeadTable from "../components/Table";
 
 const Dashboard = () => {
   const [country, setInputCountry] = useState("worldwide");
@@ -61,7 +62,6 @@ const Dashboard = () => {
   return (
     <div className={""}>
       <Navbar />
-      <h1>Dashboard</h1>
       <div>
         <Map
           countries={mapCountries}
@@ -69,6 +69,7 @@ const Dashboard = () => {
           center={mapCenter}
           zoom={mapZoom}
         />
+        <StickyHeadTable />
       </div>
     </div>
   );
